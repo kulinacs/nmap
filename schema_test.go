@@ -1,23 +1,25 @@
-package main
+package nmap
 
-import "encoding/xml"
-import "testing"
-import "io/ioutil"
+import (
+	"encoding/xml"
+	"io/ioutil"
+	"testing"
+)
 
 // https://www.markphelps.me/testing-api-clients-in-go/
-func fixture(path string) string {
+func fixture(path string) []byte {
 	b, err := ioutil.ReadFile("testdata/fixtures/" + path)
 	if err != nil {
 		panic(err)
 	}
-	return string(b)
+	return b
 }
 
 func TestNmapRun(t *testing.T) {
 	document := fixture("nmaprun.xml")
 
-	var v NmapRun
-	err := xml.Unmarshal([]byte(document), &v)
+	var v Result
+	err := xml.Unmarshal(document, &v)
 	if err != nil {
 		t.Error(err)
 	}

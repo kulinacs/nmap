@@ -1,9 +1,12 @@
-package main
+// Package nmap provides the needed structures to interact with nmap scan output
+package nmap
 
-import "encoding/xml"
+import (
+	"encoding/xml"
+)
 
-// NmapRun represents the results of an nmap scan
-type NmapRun struct {
+// Result represents the results of an nmap scan
+type Result struct {
 	XMLName          xml.Name  `xml:"nmaprun"`
 	Scanner          string    `xml:"scanner,attr"`
 	Args             string    `xml:"args,attr"`
